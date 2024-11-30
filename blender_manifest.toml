@@ -1,0 +1,42 @@
+schema_version = "1.0.0"
+
+id = "cnc_control"
+version = "1.0.0"
+name = "CNC Control"
+tagline = "Control your CNC machine with Blender"
+maintainer = "Spectral Vectors"
+type = "add-on"
+
+# # Optional: link to documentation, support, source files, etc
+# website = "https://extensions.blender.org/add-ons/my-example-package/"
+
+tags = ["3D View"]
+
+blender_version_min = "4.2.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+
+# platforms = ["windows-x64", "macos-arm64", "linux-x64"]
+# # Other supported platforms: "windows-arm64", "macos-x64"
+
+wheels = [
+  "./wheels/pyserial-3.5-py2.py3-none-any.whl",
+]
+
+# [permissions]
+# network = "Need to sync motion-capture data to server"
+# files = "Import/export FBX from/to disk"
+# clipboard = "Copy and paste bone transforms"
+
+# # Optional: advanced build settings.
+# # https://docs.blender.org/manual/en/dev/advanced/extensions/command_line_arguments.html#command-line-args-extension-build
+# [build]
+# # These are the default build excluded patterns.
+# # You only need to edit them if you want different options.
+# paths_exclude_pattern = [
+#   "__pycache__/",
+#   "/.git/",
+#   "/*.zip",
+# ]
