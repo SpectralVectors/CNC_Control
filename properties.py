@@ -5,13 +5,13 @@ from bpy.props import StringProperty, IntProperty, BoolProperty, FloatProperty
 class CNCControlProperties(PropertyGroup):
 
     port: StringProperty(
-        name="USB Port",
+        name="Port",
         default="COM3",
         description="The port used for serial communication, often: Win: COM4, Linux: ttyACM0, Mac: /dev/tty.usbmodem...",
     )
 
     rate: IntProperty(
-        name="Serial Comm Rate",
+        name="Rate",
         default=115200,
         description="The rate at which comms are sent over the serial connection",
     )
