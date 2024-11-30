@@ -25,7 +25,7 @@ class CNCControlProperties(PropertyGroup):
 
     connected: BoolProperty(
         name="Connection Status",
-        default="",
+        default=False,
         description="If Blender is connected to a CNC machine",
     )
 
