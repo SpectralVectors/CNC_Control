@@ -12,7 +12,7 @@ class CNCControlProperties(PropertyGroup):
 
     rate: IntProperty(
         name="Serial Comm Rate",
-        default="115200",
+        default=115200,
         description="The rate at which comms are sent over the serial connection",
     )
 
