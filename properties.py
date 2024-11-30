@@ -31,12 +31,12 @@ class CNCControlProperties(PropertyGroup):
 
     xy_step: FloatProperty(
         name="X/Y Step Size",
-        default="0.1",
+        default=0.1,
         description="Length of the smallest movement along the X and Y axes",
     )
 
     z_step: FloatProperty(
         name="Z Step Size",
-        default="0.01",
+        default=0.01,
         description="Length of the smallest movement along the Z axis",
     )
