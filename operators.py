@@ -20,7 +20,9 @@ class ConnectMachine(Operator):
         props = context.scene.cnccontrolprops
         port = props.port
         rate = int(props.rate)
+
         bpy.types.Scene.connection = serial.Serial(port=port, baudrate=rate)
+
         context.scene.connection.write("\r\n\r\n".encode("utf-8"))
         time.sleep(2)
         context.scene.connection.flushInput()
