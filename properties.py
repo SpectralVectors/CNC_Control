@@ -7,7 +7,7 @@ class CNCControlProperties(PropertyGroup):
     port: StringProperty(
         name="Port",
         default="COM3",
-        description="The port used for serial communication, often: Win: COM4, Linux: ttyACM0, Mac: /dev/tty.usbmodem...",
+        description="The port used for serial communication, often: Win: COM4, Linux: /dev/ttyACM0, Mac: /dev/tty.usbmodem...",
     )
 
     rate: StringProperty(
@@ -31,12 +31,12 @@ class CNCControlProperties(PropertyGroup):
 
     xy_step: FloatProperty(
         name="X/Y Step Size",
-        default=0.1,
+        default=5,
         description="Length of the smallest movement along the X and Y axes",
     )
 
     z_step: FloatProperty(
         name="Z Step Size",
-        default=0.01,
+        default=1,
         description="Length of the smallest movement along the Z axis",
     )
