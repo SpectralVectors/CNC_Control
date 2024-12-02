@@ -207,6 +207,7 @@ class MoveToX0(Operator):
     bl_label = "Move to X Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G90 G0 X0")
         props.x_position = 0
         return {"FINISHED"}
@@ -219,6 +220,7 @@ class MoveToY0(Operator):
     bl_label = "Move to Y Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G90 G0 Y0")
         props.y_position = 0
         return {"FINISHED"}
@@ -231,6 +233,7 @@ class MoveToZ0(Operator):
     bl_label = "Move to Z Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G90 G0 Z0")
         props.z_position = 0
         return {"FINISHED"}
@@ -243,6 +246,7 @@ class MoveToXYZ0(Operator):
     bl_label = "Move to XYZ Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G90 G0 X0 Y0 Z0")
         props.x_position = props.y_position = props.z_position = 0
         return {"FINISHED"}
@@ -256,6 +260,7 @@ class SetCurrentXTo0(Operator):
     bl_label = "Set current X position to X Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G10 L20 P1 X0")
         props.x_position = 0
         return {"FINISHED"}
@@ -268,6 +273,7 @@ class SetCurrentYTo0(Operator):
     bl_label = "Set current Y position to Y Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G10 L20 P1 Y0")
         props.y_position = 0
         return {"FINISHED"}
@@ -280,6 +286,7 @@ class SetCurrentZTo0(Operator):
     bl_label = "Set current Z position to Z Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G10 L20 P1 Z0")
         props.z_position = 0
         return {"FINISHED"}
@@ -292,6 +299,7 @@ class SetCurrentXYZTo0(Operator):
     bl_label = "Set current XYZ position to Z Zero"
 
     def execute(self, context):
+        props = context.scene.cnccontrolprops
         serial_command(context, "G10 L20 P1 X0 Y0 Z0")
         props.x_position = props.y_position = props.z_position = 0
         return {"FINISHED"}
