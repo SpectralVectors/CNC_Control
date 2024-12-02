@@ -4,7 +4,7 @@ import time
 from bpy.types import Operator
 
 
-def serial_command(command):
+def serial_command(context, command):
     command = f"{command} \n".encode("utf-8")
     context.scene.connection.write(command)
 
@@ -36,6 +36,7 @@ class DisconnectMachine(Operator):
 
     def execute(self, context):
         context.scene.connection.close()
+        props = context.scene.cnccontrolprops
         props.connected = False
         return {"FINISHED"}
 
@@ -48,7 +49,9 @@ class JogXPlus(Operator):
     bl_label = "Jog X+"
 
     def execute(self, context):
-        serial_command(context, "G0 X5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X{step}")
         return {"FINISHED"}
 
 
@@ -59,7 +62,9 @@ class JogXMinus(Operator):
     bl_label = "Jog X-"
 
     def execute(self, context):
-        serial_command(context, "G0 X-5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X-{step}")
         return {"FINISHED"}
 
 
@@ -71,7 +76,9 @@ class JogYPlus(Operator):
     bl_label = "Jog Y+"
 
     def execute(self, context):
-        serial_command(context, "G0 Y5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 Y{step}")
         return {"FINISHED"}
 
 
@@ -82,7 +89,9 @@ class JogYMinus(Operator):
     bl_label = "Jog Y-"
 
     def execute(self, context):
-        serial_command(context, "G0 Y-5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 Y-{step}")
         return {"FINISHED"}
 
 
@@ -94,7 +103,9 @@ class JogXYPlus(Operator):
     bl_label = "Jog XY+"
 
     def execute(self, context):
-        serial_command(context, "G0 X5 Y5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X{step} Y{step}")
         return {"FINISHED"}
 
 
@@ -105,7 +116,9 @@ class JogXYMinus(Operator):
     bl_label = "Jog XY-"
 
     def execute(self, context):
-        serial_command(context, "G0 X-5 Y-5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X-{step} Y-{step}")
         return {"FINISHED"}
 
 
@@ -116,7 +129,9 @@ class JogXPlusYMinus(Operator):
     bl_label = "Jog X+Y-"
 
     def execute(self, context):
-        serial_command(context, "G0 X5 Y-5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X{step} Y-{step}")
         return {"FINISHED"}
 
 
@@ -127,7 +142,9 @@ class JogXMinusYPlus(Operator):
     bl_label = "Jog X-Y+"
 
     def execute(self, context):
-        serial_command(context, "G0 X-5 Y5")
+        props = context.scene.cnccontrolprops
+        step = props.xy_step
+        serial_command(context, f"G21G91 G0 X-{step} Y{step}")
         return {"FINISHED"}
 
 
@@ -139,7 +156,9 @@ class JogZPlus(Operator):
     bl_label = "Jog Z+"
 
     def execute(self, context):
-        serial_command(context, "G0 Z5")
+        props = context.scene.cnccontrolprops
+        step = props.z_step
+        serial_command(context, f"G21G91 G0 Z{step}")
         return {"FINISHED"}
 
 
@@ -150,5 +169,7 @@ class JogZMinus(Operator):
     bl_label = "Jog Z-"
 
     def execute(self, context):
-        serial_command(context, "G0 Z-5")
+        props = context.scene.cnccontrolprops
+        step = props.z_step
+        serial_command(context, f"G21G91 G0 Z-{step}")
         return {"FINISHED"}
