@@ -14,6 +14,12 @@ from .operators import (
     JogXMinusYPlus,
     JogZPlus,
     JogZMinus,
+    MoveToX0,
+    MoveToY0,
+    MoveToZ0,
+    SetCurrentXTo0,
+    SetCurrentYTo0,
+    SetCurrentZTo0,
 )
 from .properties import CNCControlProperties
 
@@ -33,6 +39,12 @@ classes = [
     JogXMinusYPlus,
     JogZPlus,
     JogZMinus,
+    MoveToX0,
+    MoveToY0,
+    MoveToZ0,
+    SetCurrentXTo0,
+    SetCurrentYTo0,
+    SetCurrentZTo0,
     # .properties
     CNCControlProperties,
 ]
