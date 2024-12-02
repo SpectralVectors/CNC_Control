@@ -51,7 +51,8 @@ class JogXPlus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X{step}")
         return {"FINISHED"}
 
 
@@ -64,7 +65,8 @@ class JogXMinus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X-{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X-{step}")
         return {"FINISHED"}
 
 
@@ -78,7 +80,8 @@ class JogYPlus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 Y{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 Y{step}")
         return {"FINISHED"}
 
 
@@ -91,7 +94,8 @@ class JogYMinus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 Y-{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 Y-{step}")
         return {"FINISHED"}
 
 
@@ -105,7 +109,8 @@ class JogXYPlus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X{step} Y{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X{step} Y{step}")
         return {"FINISHED"}
 
 
@@ -118,7 +123,8 @@ class JogXYMinus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X-{step} Y-{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X-{step} Y-{step}")
         return {"FINISHED"}
 
 
@@ -131,7 +137,8 @@ class JogXPlusYMinus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X{step} Y-{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X{step} Y-{step}")
         return {"FINISHED"}
 
 
@@ -144,7 +151,8 @@ class JogXMinusYPlus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.xy_step
-        serial_command(context, f"G21G91 G0 X-{step} Y{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 X-{step} Y{step}")
         return {"FINISHED"}
 
 
@@ -158,7 +166,8 @@ class JogZPlus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.z_step
-        serial_command(context, f"G21G91 G0 Z{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 Z{step}")
         return {"FINISHED"}
 
 
@@ -171,5 +180,6 @@ class JogZMinus(Operator):
     def execute(self, context):
         props = context.scene.cnccontrolprops
         step = props.z_step
-        serial_command(context, f"G21G91 G0 Z-{step}")
+        unit = props.unit
+        serial_command(context, f"{unit}G91 G0 Z-{step}")
         return {"FINISHED"}

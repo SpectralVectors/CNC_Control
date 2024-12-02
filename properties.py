@@ -40,3 +40,9 @@ class CNCControlProperties(PropertyGroup):
         default=1,
         description="Length of the smallest movement along the Z axis",
     )
+
+    unit: StringProperty(
+        name="Unit Type",
+        default="G21",
+        description="Metric or Imperial - Millimeter or Inch",
+    )
