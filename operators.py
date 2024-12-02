@@ -1,13 +1,12 @@
 import serial
+import bpy
+import time
 from bpy.types import Operator
 
 
 def serial_command(command):
-    props = context.scene.cnccontrolprops
-    port = props.port
-    rate = int(props.rate)
-    connection = serial.Serial(port=port, baudrate=rate)
-    connection.write(command.encode("utf-8"))
+    command = f"{command} \n".encode("utf-8")
+    context.scene.connection.write(command)
 
 
 # Connect/Disconnect Machine
@@ -21,7 +20,10 @@ class ConnectMachine(Operator):
         props = context.scene.cnccontrolprops
         port = props.port
         rate = int(props.rate)
-        connection = serial.Serial(port=port, baudrate=rate)
+        bpy.types.Scene.connection = serial.Serial(port=port, baudrate=rate)
+        context.scene.connection.write("\r\n\r\n".encode("utf-8"))
+        time.sleep(2)
+        context.scene.connection.flushInput()
         props.connected = True
         return {"FINISHED"}
 
@@ -33,11 +35,7 @@ class DisconnectMachine(Operator):
     bl_label = "Disconnect Machine"
 
     def execute(self, context):
-        props = context.scene.cnccontrolprops
-        port = props.port
-        rate = int(props.rate)
-        connection = serial.Serial(port=port, baudrate=rate)
-        connection.close()
+        context.scene.connection.close()
         props.connected = False
         return {"FINISHED"}
 
@@ -50,7 +48,7 @@ class JogXPlus(Operator):
     bl_label = "Jog X+"
 
     def execute(self, context):
-        serial_command("G0 X5")
+        serial_command(context, "G0 X5")
         return {"FINISHED"}
 
 
@@ -61,7 +59,7 @@ class JogXMinus(Operator):
     bl_label = "Jog X-"
 
     def execute(self, context):
-        serial_command("G0 X-5")
+        serial_command(context, "G0 X-5")
         return {"FINISHED"}
 
 
@@ -73,7 +71,7 @@ class JogYPlus(Operator):
     bl_label = "Jog Y+"
 
     def execute(self, context):
-        serial_command("G0 Y5")
+        serial_command(context, "G0 Y5")
         return {"FINISHED"}
 
 
@@ -84,7 +82,7 @@ class JogYMinus(Operator):
     bl_label = "Jog Y-"
 
     def execute(self, context):
-        serial_command("G0 Y-5")
+        serial_command(context, "G0 Y-5")
         return {"FINISHED"}
 
 
@@ -96,7 +94,7 @@ class JogXYPlus(Operator):
     bl_label = "Jog XY+"
 
     def execute(self, context):
-        serial_command("G0 X5 Y5")
+        serial_command(context, "G0 X5 Y5")
         return {"FINISHED"}
 
 
@@ -107,7 +105,7 @@ class JogXYMinus(Operator):
     bl_label = "Jog XY-"
 
     def execute(self, context):
-        serial_command("G0 X-5 Y-5")
+        serial_command(context, "G0 X-5 Y-5")
         return {"FINISHED"}
 
 
@@ -118,7 +116,7 @@ class JogXPlusYMinus(Operator):
     bl_label = "Jog X+Y-"
 
     def execute(self, context):
-        serial_command("G0 X5 Y-5")
+        serial_command(context, "G0 X5 Y-5")
         return {"FINISHED"}
 
 
@@ -129,7 +127,7 @@ class JogXMinusYPlus(Operator):
     bl_label = "Jog X-Y+"
 
     def execute(self, context):
-        serial_command("G0 X-5 Y5")
+        serial_command(context, "G0 X-5 Y5")
         return {"FINISHED"}
 
 
@@ -141,7 +139,7 @@ class JogZPlus(Operator):
     bl_label = "Jog Z+"
 
     def execute(self, context):
-        serial_command("G0 Z5")
+        serial_command(context, "G0 Z5")
         return {"FINISHED"}
 
 
@@ -152,5 +150,5 @@ class JogZMinus(Operator):
     bl_label = "Jog Z-"
 
     def execute(self, context):
-        serial_command("G0 Z-5")
+        serial_command(context, "G0 Z-5")
         return {"FINISHED"}
