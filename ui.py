@@ -54,31 +54,35 @@ class CAMControlPanel(Panel):
         header, position_panel = layout.panel("position", default_closed=False)
         header.label(text="Position", icon="ORIENTATION_LOCAL")
         if position_panel:
-            column = position_panel.column(align=True)
-            box = column.box()
-            # box.alignment = "RIGHT"
-            box.scale_x = box.scale_y = 2
-            box.label(text="1.2321", icon="EVENT_X")
-            box = column.box()
-            # box.alignment = "RIGHT"
-            box.scale_x = box.scale_y = 2
-            box.label(text="1.0456", icon="EVENT_Y")
-            box = column.box()
-            # box.alignment = "RIGHT"
-            box.scale_x = box.scale_y = 2
-            box.label(text="1.7981", icon="EVENT_Z")
+            main_column = position_panel.column(align=True)
+            main_column.scale_y = 2
+
+            box = main_column.box()
+            column = box.column(align=True)
             row = column.row(align=True)
-            row.scale_x = row.scale_y = 2
+            # row.alignment = "CENTER"
+            row.label(text="", icon="SEQUENCE_COLOR_01")
+            row.label(text=str(props.x_position), icon="EVENT_X")
+            row = column.row(align=True)
+            # row.alignment = "CENTER"
+            row.label(text="", icon="SEQUENCE_COLOR_04")
+            row.label(text=str(props.y_position), icon="EVENT_Y")
+            row = column.row(align=True)
+            # row.alignment = "CENTER"
+            row.label(text="", icon="SEQUENCE_COLOR_05")
+            row.label(text=str(props.z_position), icon="EVENT_Z")
+
+            row = main_column.row(align=True)
             row.label(text="Move To:")
-            row.operator("render.render", text="X0")
-            row.operator("render.render", text="Y0")
-            row.operator("render.render", text="Z0")
-            row = column.row(align=True)
-            row.scale_x = row.scale_y = 2
+            row.operator("cnc.move_to_x_zero", text="X0")
+            row.operator("cnc.move_to_y_zero", text="Y0")
+            row.operator("cnc.move_to_z_zero", text="Z0")
+
+            row = main_column.row(align=True)
             row.label(text="Set Current:")
-            row.operator("render.render", text="X=0")
-            row.operator("render.render", text="Y=0")
-            row.operator("render.render", text="Z=0")
+            row.operator("cnc.current_x_to_zero", text="X=0")
+            row.operator("cnc.current_y_to_zero", text="Y=0")
+            row.operator("cnc.current_z_to_zero", text="Z=0")
 
         # Jog Control Panel
         header, jog_panel = layout.panel("jog", default_closed=False)
@@ -116,6 +120,8 @@ class CAMControlPanel(Panel):
             column = jog_panel.column(align=True)
             box = column.box()
             column = box.column(align=True)
-            column.label(text="Jog Step Size")
+            column.label(text="Step Size")
+            column.use_property_split = True
+            column.use_property_decorate = False
             column.prop(props, "xy_step", text="X/Y")
             column.prop(props, "z_step", text="Z")

@@ -183,3 +183,71 @@ class JogZMinus(Operator):
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 Z-{step}")
         return {"FINISHED"}
+
+
+# Move to 0 - XYZ
+class MoveToX0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.move_to_x_zero"
+    bl_label = "Move to X Zero"
+
+    def execute(self, context):
+        serial_command(context, "G90 G0 X0")
+        return {"FINISHED"}
+
+
+class MoveToY0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.move_to_y_zero"
+    bl_label = "Move to Y Zero"
+
+    def execute(self, context):
+        serial_command(context, "G90 G0 Y0")
+        return {"FINISHED"}
+
+
+class MoveToZ0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.move_to_z_zero"
+    bl_label = "Move to Z Zero"
+
+    def execute(self, context):
+        serial_command(context, "G90 G0 Z0")
+        return {"FINISHED"}
+
+
+# Set current position to 0 - XYZ
+class SetCurrentXTo0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.current_x_to_zero"
+    bl_label = "Set current X position to X Zero"
+
+    def execute(self, context):
+        serial_command(context, "G10 L20 P1 X0")
+        return {"FINISHED"}
+
+
+class SetCurrentYTo0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.current_y_to_zero"
+    bl_label = "Set current Y position to Y Zero"
+
+    def execute(self, context):
+        serial_command(context, "G10 L20 P1 Y0")
+        return {"FINISHED"}
+
+
+class SetCurrentZTo0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.current_z_to_zero"
+    bl_label = "Set current Z position to Z Zero"
+
+    def execute(self, context):
+        serial_command(context, "G10 L20 P1 Z0")
+        return {"FINISHED"}

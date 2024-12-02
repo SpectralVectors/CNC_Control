@@ -46,3 +46,21 @@ class CNCControlProperties(PropertyGroup):
         default="G21",
         description="Metric or Imperial - Millimeter or Inch",
     )
+
+    x_position: FloatProperty(
+        name="X Position",
+        default=0,
+        description="Current position of the spindle along the X axis",
+    )
+
+    y_position: FloatProperty(
+        name="Y Position",
+        default=0,
+        description="Current position of the spindle along the Y axis",
+    )
+
+    z_position: FloatProperty(
+        name="Z Position",
+        default=0,
+        description="Current position of the spindle along the Z axis",
+    )
