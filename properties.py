@@ -10,9 +10,9 @@ class CNCControlProperties(PropertyGroup):
         description="The port used for serial communication, often: Win: COM4, Linux: ttyACM0, Mac: /dev/tty.usbmodem...",
     )
 
-    rate: IntProperty(
+    rate: StringProperty(
         name="Rate",
-        default=115200,
+        default="115200",
         description="The rate at which comms are sent over the serial connection",
     )
 

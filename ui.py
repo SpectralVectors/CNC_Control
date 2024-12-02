@@ -8,7 +8,7 @@ class CAMControlPanel(Panel):
     bl_idname = "OBJECT_PT_cam_control"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
-    bl_category = "CNC Control"
+    bl_category = "gControl"
 
     def draw(self, context):
         layout = self.layout
@@ -19,16 +19,24 @@ class CAMControlPanel(Panel):
         header, connection_panel = layout.panel("connection", default_closed=False)
         header.label(text="Connection", icon="LINKED")
         if connection_panel:
-            column = connection_panel.column(align=True)
-            box = column.box()
-            column = box.column(align=True)
-            row = column.row(align=True)
-            row.prop(props, "port")
-            row.prop(props, "rate")
+            main_column = connection_panel.column(align=True)
+            box = main_column.box()
+            sub_box = box.box()
+            row = sub_box.row()
+            row.scale_y = 2
             connected = props.connected
             text = "Status: Connected" if connected else "Status: No Connection"
             icon = "SEQUENCE_COLOR_01" if not connected else "SEQUENCE_COLOR_04"
-            column.label(text=text, icon=icon)
+            row.label(text=text, icon=icon)
+            icon = "UNLINKED" if not props.connected else "LINKED"
+            row.label(text="", icon=icon)
+            column = box.column(align=True)
+            column.prop(props, "port")
+            column.prop(props, "rate")
+            operator = "cnc.connect_machine" if not props.connected else "cnc.disconnect_machine"
+            row = main_column.row()
+            row.scale_y = 2
+            row.operator(operator=operator, icon="PLUGIN")
 
         # Gcode Panel
         header, gcode_panel = layout.panel("gcode", default_closed=False)
@@ -48,26 +56,26 @@ class CAMControlPanel(Panel):
         if position_panel:
             column = position_panel.column(align=True)
             box = column.box()
-            box.alignment = "RIGHT"
+            # box.alignment = "RIGHT"
             box.scale_x = box.scale_y = 2
             box.label(text="1.2321", icon="EVENT_X")
             box = column.box()
-            box.alignment = "RIGHT"
+            # box.alignment = "RIGHT"
             box.scale_x = box.scale_y = 2
             box.label(text="1.0456", icon="EVENT_Y")
             box = column.box()
-            box.alignment = "RIGHT"
+            # box.alignment = "RIGHT"
             box.scale_x = box.scale_y = 2
             box.label(text="1.7981", icon="EVENT_Z")
             row = column.row(align=True)
             row.scale_x = row.scale_y = 2
-            row.label(text="Go To:")
+            row.label(text="Move To:")
             row.operator("render.render", text="X0")
             row.operator("render.render", text="Y0")
             row.operator("render.render", text="Z0")
             row = column.row(align=True)
             row.scale_x = row.scale_y = 2
-            row.label(text="Set:")
+            row.label(text="Set Current:")
             row.operator("render.render", text="X=0")
             row.operator("render.render", text="Y=0")
             row.operator("render.render", text="Z=0")

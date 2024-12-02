@@ -2,6 +2,8 @@ import bpy
 
 from .ui import CAMControlPanel
 from .operators import (
+    ConnectMachine,
+    DisconnectMachine,
     JogXPlus,
     JogXMinus,
     JogYPlus,
@@ -19,6 +21,8 @@ classes = [
     # .ui
     CAMControlPanel,
     # .operators
+    ConnectMachine,
+    DisconnectMachine,
     JogXPlus,
     JogXMinus,
     JogYPlus,

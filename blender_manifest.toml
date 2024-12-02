@@ -2,8 +2,8 @@ schema_version = "1.0.0"
 
 id = "cnc_control"
 version = "1.0.0"
-name = "CNC Control"
-tagline = "Control your CNC machine with Blender"
+name = "gControl"
+tagline = "Control your grbl CNC machine with Blender"
 maintainer = "Spectral Vectors"
 type = "add-on"
 
