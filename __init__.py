@@ -22,6 +22,9 @@ from .operators import (
     SetCurrentYTo0,
     SetCurrentZTo0,
     SetCurrentXYZTo0,
+    RunJobFile,
+    PauseJobFile,
+    StopJobFile,
 )
 from .properties import CNCControlProperties
 
@@ -49,6 +52,9 @@ classes = [
     SetCurrentYTo0,
     SetCurrentZTo0,
     SetCurrentXYZTo0,
+    RunJobFile,
+    PauseJobFile,
+    StopJobFile,
     # .properties
     CNCControlProperties,
 ]

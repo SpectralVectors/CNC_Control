@@ -46,9 +46,9 @@ class CAMControlPanel(Panel):
             box.prop(props, "jobfile")
             row = box.row(align=True)
             row.scale_x = row.scale_y = 2
-            row.operator("render.render", text="Run", icon="PLAY")
-            row.operator("render.render", text="Pause", icon="PAUSE")
-            row.operator("render.render", text="Stop", icon="SNAP_FACE")
+            row.operator("cnc.run_job_file", text="Run", icon="PLAY")
+            row.operator("cnc.pause_job_file", text="Pause", icon="PAUSE")
+            row.operator("cnc.stop_job_file", text="Stop", icon="SNAP_FACE")
 
         # Position Panel
         header, position_panel = layout.panel("position", default_closed=False)

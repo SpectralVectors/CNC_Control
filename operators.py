@@ -305,3 +305,44 @@ class SetCurrentXYZTo0(Operator):
         serial_command(context, "G10 L20 P1 X0 Y0 Z0")
         props.x_position = props.y_position = props.z_position = 0
         return {"FINISHED"}
+
+
+class RunJobFile(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.run_job_file"
+    bl_label = "Run the currently loaded gcode file"
+
+    def execute(self, context):
+        props = context.scene.cnccontrolprops
+        jobfile = open(props.jobfile, "r")
+        for line in jobfile:
+            serial_command(context, line)
+            grbl_out = context.scene.connection.readline()
+            print(grbl_out)
+
+        return {"FINISHED"}
+
+
+class PauseJobFile(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.pause_job_file"
+    bl_label = "Pause the currently running job"
+
+    def execute(self, context):
+        serial_command(context, "M0")
+
+        return {"FINISHED"}
+
+
+class StopJobFile(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.stop_job_file"
+    bl_label = "Stop the currently running job"
+
+    def execute(self, context):
+        serial_command(context, "M2")
+
+        return {"FINISHED"}
