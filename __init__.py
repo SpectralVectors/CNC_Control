@@ -17,9 +17,11 @@ from .operators import (
     MoveToX0,
     MoveToY0,
     MoveToZ0,
+    MoveToXYZ0,
     SetCurrentXTo0,
     SetCurrentYTo0,
     SetCurrentZTo0,
+    SetCurrentXYZTo0,
 )
 from .properties import CNCControlProperties
 
@@ -42,9 +44,11 @@ classes = [
     MoveToX0,
     MoveToY0,
     MoveToZ0,
+    MoveToXYZ0,
     SetCurrentXTo0,
     SetCurrentYTo0,
     SetCurrentZTo0,
+    SetCurrentXYZTo0,
     # .properties
     CNCControlProperties,
 ]

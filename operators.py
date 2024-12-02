@@ -219,6 +219,17 @@ class MoveToZ0(Operator):
         return {"FINISHED"}
 
 
+class MoveToXYZ0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.move_to_xyz_zero"
+    bl_label = "Move to XYZ Zero"
+
+    def execute(self, context):
+        serial_command(context, "G90 G0 X0 Y0 Z0")
+        return {"FINISHED"}
+
+
 # Set current position to 0 - XYZ
 class SetCurrentXTo0(Operator):
     """Tooltip"""
@@ -250,4 +261,15 @@ class SetCurrentZTo0(Operator):
 
     def execute(self, context):
         serial_command(context, "G10 L20 P1 Z0")
+        return {"FINISHED"}
+
+
+class SetCurrentXYZTo0(Operator):
+    """Tooltip"""
+
+    bl_idname = "cnc.current_xyz_to_zero"
+    bl_label = "Set current XYZ position to Z Zero"
+
+    def execute(self, context):
+        serial_command(context, "G10 L20 P1 X0 Y0 Z0")
         return {"FINISHED"}
