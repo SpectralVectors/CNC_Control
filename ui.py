@@ -14,6 +14,7 @@ class CAMControlPanel(Panel):
         layout = self.layout
 
         props = context.scene.cnccontrolprops
+        running_job = props.running_job
 
         # Connection Panel
         header, connection_panel = layout.panel("connection", default_closed=False)
@@ -46,7 +47,8 @@ class CAMControlPanel(Panel):
             box.prop(props, "jobfile")
             row = box.row(align=True)
             row.scale_x = row.scale_y = 2
-            row.operator("cnc.run_job_file", text="Run", icon="PLAY")
+            text = "Resume" if running_job else "Run"
+            row.operator("cnc.run_job_file", text=text, icon="PLAY")
             row.operator("cnc.pause_job_file", text="Pause", icon="PAUSE")
             row.operator("cnc.stop_job_file", text="Stop", icon="SNAP_FACE")
 

@@ -29,6 +29,12 @@ class CNCControlProperties(PropertyGroup):
         description="If Blender is connected to a CNC machine",
     )
 
+    running_job: BoolProperty(
+        name="Job Status",
+        default=False,
+        description="If a job is currently running from a gcode file",
+    )
+
     xy_step: FloatProperty(
         name="X/Y Step Size",
         default=5,
