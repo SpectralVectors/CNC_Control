@@ -53,6 +53,7 @@ class JogXPlus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X{step}")
+        props.x_position += step
         return {"FINISHED"}
 
 
@@ -67,6 +68,7 @@ class JogXMinus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X-{step}")
+        props.x_position -= step
         return {"FINISHED"}
 
 
@@ -82,6 +84,7 @@ class JogYPlus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 Y{step}")
+        props.y_position += step
         return {"FINISHED"}
 
 
@@ -96,6 +99,7 @@ class JogYMinus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 Y-{step}")
+        props.y_position -= step
         return {"FINISHED"}
 
 
@@ -111,6 +115,8 @@ class JogXYPlus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X{step} Y{step}")
+        props.x_position += step
+        props.y_position += step
         return {"FINISHED"}
 
 
@@ -125,6 +131,8 @@ class JogXYMinus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X-{step} Y-{step}")
+        props.x_position -= step
+        props.y_position -= step
         return {"FINISHED"}
 
 
@@ -139,6 +147,8 @@ class JogXPlusYMinus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X{step} Y-{step}")
+        props.x_position += step
+        props.y_position -= step
         return {"FINISHED"}
 
 
@@ -153,6 +163,8 @@ class JogXMinusYPlus(Operator):
         step = props.xy_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 X-{step} Y{step}")
+        props.x_position -= step
+        props.y_position += step
         return {"FINISHED"}
 
 
@@ -168,6 +180,7 @@ class JogZPlus(Operator):
         step = props.z_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 Z{step}")
+        props.z_position += step
         return {"FINISHED"}
 
 
@@ -182,6 +195,7 @@ class JogZMinus(Operator):
         step = props.z_step
         unit = props.unit
         serial_command(context, f"{unit}G91 G0 Z-{step}")
+        props.z_position -= step
         return {"FINISHED"}
 
 
@@ -194,6 +208,7 @@ class MoveToX0(Operator):
 
     def execute(self, context):
         serial_command(context, "G90 G0 X0")
+        props.x_position = 0
         return {"FINISHED"}
 
 
@@ -205,6 +220,7 @@ class MoveToY0(Operator):
 
     def execute(self, context):
         serial_command(context, "G90 G0 Y0")
+        props.y_position = 0
         return {"FINISHED"}
 
 
@@ -216,6 +232,7 @@ class MoveToZ0(Operator):
 
     def execute(self, context):
         serial_command(context, "G90 G0 Z0")
+        props.z_position = 0
         return {"FINISHED"}
 
 
@@ -227,6 +244,7 @@ class MoveToXYZ0(Operator):
 
     def execute(self, context):
         serial_command(context, "G90 G0 X0 Y0 Z0")
+        props.x_position = props.y_position = props.z_position = 0
         return {"FINISHED"}
 
 
@@ -239,6 +257,7 @@ class SetCurrentXTo0(Operator):
 
     def execute(self, context):
         serial_command(context, "G10 L20 P1 X0")
+        props.x_position = 0
         return {"FINISHED"}
 
 
@@ -250,6 +269,7 @@ class SetCurrentYTo0(Operator):
 
     def execute(self, context):
         serial_command(context, "G10 L20 P1 Y0")
+        props.y_position = 0
         return {"FINISHED"}
 
 
@@ -261,6 +281,7 @@ class SetCurrentZTo0(Operator):
 
     def execute(self, context):
         serial_command(context, "G10 L20 P1 Z0")
+        props.z_position = 0
         return {"FINISHED"}
 
 
@@ -272,4 +293,5 @@ class SetCurrentXYZTo0(Operator):
 
     def execute(self, context):
         serial_command(context, "G10 L20 P1 X0 Y0 Z0")
+        props.x_position = props.y_position = props.z_position = 0
         return {"FINISHED"}
