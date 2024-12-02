@@ -318,12 +318,14 @@ class RunJobFile(Operator):
         running_job = props.running_job
         if not running_job:
             jobfile = open(props.jobfile, "r")
+            running_job = True
             for line in jobfile:
                 serial_command(context, line)
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
         else:
             serial_command(context, "~")
+        running_job = False
 
         return {"FINISHED"}
 
