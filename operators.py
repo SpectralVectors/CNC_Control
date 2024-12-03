@@ -26,6 +26,7 @@ class ConnectMachine(Operator):
         context.scene.connection.write("\r\n\r\n".encode("utf-8"))
         time.sleep(2)
         context.scene.connection.flushInput()
+        context.area.tag_redraw()
         props.connected = True
         return {"FINISHED"}
 
@@ -317,15 +318,16 @@ class RunJobFile(Operator):
         props = context.scene.cnccontrolprops
         running_job = props.running_job
         if not running_job:
-            jobfile = open(props.jobfile, "r")
             running_job = True
+            jobfile = open(props.jobfile, "r")
             for line in jobfile:
                 serial_command(context, line)
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
+            jobfile.close()
+            running_job = False
         else:
             serial_command(context, "~")
-        running_job = False
 
         return {"FINISHED"}
 
