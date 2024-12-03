@@ -10,7 +10,7 @@ class CNCControlProperties(PropertyGroup):
 
     port: StringProperty(
         name="Port",
-        default="COM3",
+        default="/dev/ttyACM0",
         description="The port used for serial communication, often: Win: COM4, Linux: /dev/ttyACM0, Mac: /dev/tty.usbmodem...",
     )
 
