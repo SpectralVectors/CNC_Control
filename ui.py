@@ -97,7 +97,7 @@ class CAMControlPanel(Panel):
             grid.operator("cnc.jog_xy_minus", text="↙")
 
             grid.operator("cnc.jog_y_plus", text="↑ Y+")
-            grid.operator("render.render", text="", icon="HOME")
+            grid.operator("cnc.move_to_xyz_zero", text="", icon="HOME")
             grid.operator("cnc.jog_y_minus", text="↓ Y-")
 
             grid.operator("cnc.jog_xy_plus", text="↗")
