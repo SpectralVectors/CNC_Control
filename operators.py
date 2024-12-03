@@ -337,6 +337,7 @@ class RunJobFile(Operator):
                 serial_command(context, props.command_string)
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
+                props.running_job = False
         else:
             serial_command(context, "~")
 
