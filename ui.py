@@ -71,20 +71,18 @@ class CAMControlPanel(Panel):
 
             box = main_column.box()
             column = box.column(align=True)
+            column.alignment = "CENTER"
             row = column.row(align=True)
-            row.alignment = "CENTER"
             row.label(text="", icon="SEQUENCE_COLOR_01")
             row.label(text=str(props.x_position), icon="EVENT_X")
             row.operator("cnc.move_to_x_zero", text="Go To X0")
             row.operator("cnc.current_x_to_zero", text="Set X=0")
             row = column.row(align=True)
-            row.alignment = "CENTER"
             row.label(text="", icon="SEQUENCE_COLOR_04")
             row.label(text=str(props.y_position), icon="EVENT_Y")
             row.operator("cnc.move_to_y_zero", text="Go To Y0")
             row.operator("cnc.current_y_to_zero", text="Set Y=0")
             row = column.row(align=True)
-            row.alignment = "CENTER"
             row.label(text="", icon="SEQUENCE_COLOR_05")
             row.label(text=str(props.z_position), icon="EVENT_Z")
             row.operator("cnc.move_to_z_zero", text="Go To Z0")
