@@ -330,7 +330,7 @@ class RunJobFile(Operator):
                 space = [area.spaces[0] for area in screen.areas if area.type == "TEXT_EDITOR"][0]
                 text = space.text
                 for line in text.lines:
-                    serial_command(context, line)
+                    serial_command(context, line.body)
                     grbl_out = context.scene.connection.readline()
                     print(grbl_out)
             elif props.source == "COMMAND":
