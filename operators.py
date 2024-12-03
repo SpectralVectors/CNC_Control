@@ -315,6 +315,7 @@ class RunJobFile(Operator):
     bl_label = "Run the currently loaded gcode file"
 
     def execute(self, context):
+        context.area.tag_redraw()
         props = context.scene.cnccontrolprops
         running_job = props.running_job
         if not running_job:
@@ -339,7 +340,11 @@ class PauseJobFile(Operator):
     bl_label = "Pause the currently running job"
 
     def execute(self, context):
+        context.area.tag_redraw()
+        props = context.scene.cnccontrolprops
+        running_job = props.running_job
         serial_command(context, "!")
+        running_job = False
 
         return {"FINISHED"}
 
@@ -351,6 +356,10 @@ class StopJobFile(Operator):
     bl_label = "Stop the currently running job"
 
     def execute(self, context):
+        context.area.tag_redraw()
+        props = context.scene.cnccontrolprops
+        running_job = props.running_job
         serial_command(context, "\x18")
+        running_job = False
 
         return {"FINISHED"}
