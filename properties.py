@@ -2,6 +2,10 @@ from bpy_types import PropertyGroup
 from bpy.props import StringProperty, IntProperty, BoolProperty, FloatProperty
 
 
+def update_job(self, context):
+    context.area.tag_redraw()
+
+
 class CNCControlProperties(PropertyGroup):
 
     port: StringProperty(
@@ -33,6 +37,7 @@ class CNCControlProperties(PropertyGroup):
         name="Job Status",
         default=False,
         description="If a job is currently running from a gcode file",
+        update=update_job,
     )
 
     xy_step: FloatProperty(
