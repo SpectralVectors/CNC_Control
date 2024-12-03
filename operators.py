@@ -316,16 +316,15 @@ class RunJobFile(Operator):
 
     def execute(self, context):
         props = context.scene.cnccontrolprops
-        running_job = props.running_job
-        if not running_job:
-            running_job = True
+        if not props.running_job:
+            props.running_job = True
             jobfile = open(props.jobfile, "r")
             for line in jobfile:
                 serial_command(context, line)
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
             jobfile.close()
-            # running_job = False
+            # props.running_job = False
         else:
             serial_command(context, "~")
 
@@ -340,9 +339,8 @@ class PauseJobFile(Operator):
 
     def execute(self, context):
         props = context.scene.cnccontrolprops
-        running_job = props.running_job
         serial_command(context, "!")
-        running_job = True
+        props.running_job = True
 
         return {"FINISHED"}
 
@@ -355,8 +353,7 @@ class StopJobFile(Operator):
 
     def execute(self, context):
         props = context.scene.cnccontrolprops
-        running_job = props.running_job
         serial_command(context, "\x18")
-        running_job = False
+        props.running_job = False
 
         return {"FINISHED"}
