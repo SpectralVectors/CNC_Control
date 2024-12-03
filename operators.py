@@ -318,12 +318,25 @@ class RunJobFile(Operator):
         props = context.scene.cnccontrolprops
         if not props.running_job:
             props.running_job = True
-            jobfile = open(props.jobfile, "r")
-            for line in jobfile:
-                serial_command(context, line)
+            if props.source == "FILE":
+                jobfile = open(props.jobfile, "r")
+                for line in jobfile:
+                    serial_command(context, line)
+                    grbl_out = context.scene.connection.readline()
+                    print(grbl_out)
+                jobfile.close()
+            elif props.source == "TEXT":
+                screen = bpy.data.workspaces["Scripting"].screens["Scripting"]
+                space = [area.spaces[0] for area in screen.areas if area.type == "TEXT_EDITOR"][0]
+                text = space.text.lines
+                for line in text:
+                    serial_command(context, line)
+                    grbl_out = context.scene.connection.readline()
+                    print(grbl_out)
+            elif props.source == "COMMAND":
+                serial_command(context, props.command_string)
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
-            jobfile.close()
         else:
             serial_command(context, "~")
 
