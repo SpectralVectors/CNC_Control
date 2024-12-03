@@ -325,7 +325,7 @@ class RunJobFile(Operator):
                 grbl_out = context.scene.connection.readline()
                 print(grbl_out)
             jobfile.close()
-            running_job = False
+            # running_job = False
         else:
             serial_command(context, "~")
 
