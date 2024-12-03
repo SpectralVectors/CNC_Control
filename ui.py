@@ -1,3 +1,4 @@
+import bpy
 from bpy.types import Panel
 
 
@@ -44,7 +45,16 @@ class CAMControlPanel(Panel):
         header.label(text="Gcode", icon="FILEBROWSER")
         if gcode_panel:
             box = gcode_panel.box()
-            box.prop(props, "jobfile")
+            column = box.column(align=True)
+            column.prop(props, "source")
+            if props.source == "FILE":
+                column.prop(props, "jobfile")
+            elif props.source == "TEXT":
+                screen = bpy.data.workspaces["Scripting"].screens["Scripting"]
+                space = [area.spaces[0] for area in screen.areas if area.type == "TEXT_EDITOR"][0]
+                column.template_ID(space, "text")
+            elif props.source == "COMMAND":
+                column.prop(props, "command_string")
             row = box.row(align=True)
             row.scale_x = row.scale_y = 2
             text = "Resume" if running_job else "Run"
@@ -76,8 +86,8 @@ class CAMControlPanel(Panel):
             row.label(text=str(props.z_position), icon="EVENT_Z")
             row.operator("cnc.move_to_z_zero", text="Go To Z0")
             row.operator("cnc.current_z_to_zero", text="Set Z=0")
-            column.operator("cnc.move_to_xyz_zero", text="Go To XYZ0")
-            column.operator("cnc.current_xyz_to_zero", text="Set XYZ=0")
+            column.operator("cnc.move_to_xyz_zero", text="Go To XYZ0", icon="ORIENTATION_PARENT")
+            column.operator("cnc.current_xyz_to_zero", text="Set XYZ=0", icon="EMPTY_AXIS")
 
         # Jog Control Panel
         header, jog_panel = layout.panel("jog", default_closed=False)

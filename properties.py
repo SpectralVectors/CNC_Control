@@ -1,5 +1,5 @@
 from bpy_types import PropertyGroup
-from bpy.props import StringProperty, IntProperty, BoolProperty, FloatProperty
+from bpy.props import StringProperty, IntProperty, BoolProperty, EnumProperty, FloatProperty
 
 
 def update_job(self, context):
@@ -25,6 +25,22 @@ class CNCControlProperties(PropertyGroup):
         default="",
         description="The gcode file for the job to be cut",
         subtype="FILE_PATH",
+    )
+
+    source: EnumProperty(
+        name="Source",
+        items=[
+            ("FILE", "File", "A file loaded from disk"),
+            ("TEXT", "Text", "A text block from Blender's Text Editor"),
+            ("COMMAND", "Command", "A custom string entered by the user"),
+        ],
+        default="FILE",
+    )
+
+    command_string: StringProperty(
+        name="Command",
+        default="G0 X5 Y5",
+        description="Enter gcode commands to be run as a job",
     )
 
     connected: BoolProperty(
