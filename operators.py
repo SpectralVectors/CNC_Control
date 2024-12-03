@@ -328,8 +328,8 @@ class RunJobFile(Operator):
             elif props.source == "TEXT":
                 screen = bpy.data.workspaces["Scripting"].screens["Scripting"]
                 space = [area.spaces[0] for area in screen.areas if area.type == "TEXT_EDITOR"][0]
-                text = space.text.lines
-                for line in text:
+                text = space.text
+                for line in text.lines:
                     serial_command(context, line)
                     grbl_out = context.scene.connection.readline()
                     print(grbl_out)
